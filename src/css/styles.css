@@ -135,17 +135,33 @@ main {
 }
 
 .container .profile-data .repositories ul li a {
-  padding: 20px;
-  border: 1px solid grey;
+  height: 90px;
   margin: 20px;
+  padding: 20px;
   display: block;
-  border-radius: 7px;
+  border: 1px solid grey;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
   transition: 0.3s ease-in-out;
 }
 
 .container .profile-data .repositories ul li a:hover {
   background-color: hotpink;
   color: #fff;
+}
+.container .profile-data .repositories.section ul li div.contadores {
+  display: flex;
+  width: fit-content;
+  gap: 0.1rem;
+}
+
+.container .profile-data .repositories.section ul li p {
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  background-color: #705ccc;
+  margin-top: 5px;
 }
 
 .container .profile-data.hide {

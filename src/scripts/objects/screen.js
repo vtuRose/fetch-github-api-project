@@ -4,15 +4,26 @@ const screen = {
     this.userProfile.innerHTML = `<div class="info">
                 <img src="${user.avatarUrl}" alt="Foto do perfil do usuário" />
                 <div class="data">
-                    <h1>${user.name ?? "não possui nome cadastrado 😭"}</h1>
-                    <p>${user.bio ?? "não possui bio cadastrado 😭"}</p>
-                    <p>Seguidores: ${user.followers}</p>
-                    <p>Seguindo: ${user.following}</p>
+                    <h1>${user.name ?? "não possui nome cadastrado 🙁"}</h1>
+                    <p>${user.bio ?? "não possui bio cadastrado 🙁"}</p>
+                    <p>Seguidores: 👥${user.followers}</p>
+                    <p>Seguindo: 👤${user.following}</p>
                 </div>
                 </div>`;
 
     let repositoriesItens = "";
-    user.repositories.forEach((repo) => (repositoriesItens += `<li><a href="${repo.html_url}" target="_blank">${repo.name}</a></li>`));
+    user.repositories.forEach(
+      (repo) =>
+        (repositoriesItens += `<li>
+          <a href="${repo.html_url}" target="_blank">${repo.name}
+                                    <div class="contadores">
+                                      <p>🍴${repo.fork_count ?? "0"}</p>
+                                      <p>🌟${repo.stargazers_count}</p>
+                                      <p>👀${repo.watchers_count}</p>
+                                      <p>👨‍💻${repo.language ?? "❌"}</p>
+                                    </div></a>
+          </li>`)
+    );
 
     if (user.repositories.length > 0) {
       this.userProfile.innerHTML += `<div class="repositories section">
