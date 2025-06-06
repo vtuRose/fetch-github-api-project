@@ -43,5 +43,11 @@ async function getUserData(userName) {
   user.setRepositories(repositoriesResponse);
 
   screen.renderUser(user);
-  console.log(user);
+
+  const eventsResponse = await fetch(`https://api.github.com/users/${userName}/events?per_page=${10}`);
+  const events = await eventsResponse.json();
+
+  const filteredEvents = events.filter((event) => event.type === "PushEvent" || event.type === "CreateEvent").slice(0, 10);
+
+  screen.renderEvents(filteredEvents);
 }

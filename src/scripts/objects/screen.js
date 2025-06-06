@@ -21,6 +21,28 @@ const screen = {
                                      </div>`;
     }
   },
+  renderEvents(events) {
+    if (!events.length) {
+      this.userProfile.innerHTML += `<h3>Não há eventos disponíveis</h3>`;
+      return;
+    }
+
+    let eventsItens = "";
+    events.forEach((event) => {
+      if (event.type === "PushEvent") {
+        event.payload.commits.forEach((commit) => {
+          eventsItens += `<li><span class="push">PushEvent</span> -> <span>${event.repo.name}</span><br>
+          ${commit.message}</li>`;
+        });
+      } else if (event.type === "CreateEvent") {
+        eventsItens += `<li><span class="create">CreateEvent</span> -> <span>${event.repo.name}</span><br>
+        Sem mensagem de commit</li>`;
+      }
+    });
+
+    this.userProfile.innerHTML += `<h2>Eventos recentes</h2>
+     <ul>${eventsItens}</ul>`;
+  },
   renderNotFound() {
     this.userProfile.innerHTML = `<h3>Usuário não encontrado</h3>`;
   },
